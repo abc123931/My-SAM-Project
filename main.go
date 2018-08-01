@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"io/ioutil"
 
 	"github.com/aws/aws-lambda-go/events"
@@ -15,6 +16,8 @@ func Handler(request events.APIGatewayProxyRequest) (events.APIGatewayProxyRespo
 	if err != nil {
 		return events.APIGatewayProxyResponse{}, err
 	}
+
+	fmt.Println("hello")
 
 	return events.APIGatewayProxyResponse{
 		StatusCode: 200,
