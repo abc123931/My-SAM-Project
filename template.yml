@@ -22,6 +22,7 @@ Resources:
   GetHelloWorld:
     Type: AWS::Serverless::Function
     Properties:
+      CodeUri: hello-world/
       Handler: main
       Runtime: go1.x
       Role:
@@ -32,4 +33,19 @@ Resources:
           Type: Api
           Properties:
             Path: /
+            Method: get
+  GetTestFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: testhandler/
+      Handler: main
+      Runtime: go1.x
+      Role:
+        Fn::ImportValue:
+          !Join ['-', [!Ref 'ProjectId', !Ref 'AWS::Region', 'LambdaTrustRole']]
+      Events:
+        GetEvent:
+          Type: Api
+          Properties:
+            Path: /test
             Method: get
