@@ -17,12 +17,9 @@ phases:
       - type go && go version
 
       - echo ${CODEBUILD_SRC_DIR}
-      # Install golint
-      - go get -u github.com/golang/lint/golint
+      - ls ${CODEBUILD_SRC_DIR}
 
-      # Install Testify to use common assertions and mocks in tests
-      - go get -u github.com/stretchr/testify
-
+      # install dep
       - go get -u github.com/golang/dep/cmd/dep
 
   pre_build:
