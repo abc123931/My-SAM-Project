@@ -40,9 +40,9 @@ Resources:
       CodeUri: testhandler/
       Handler: main
       Runtime: go1.x
-      Role:
-        Fn::ImportValue:
-          !Join ['-', [!Ref 'ProjectId', !Ref 'AWS::Region', 'LambdaTrustRole']]
+      Role: role-lambdaexec
+        # Fn::ImportValue:
+        #   !Join ['-', [!Ref 'ProjectId', !Ref 'AWS::Region', 'LambdaTrustRole']]
       Events:
         GetEvent:
           Type: Api
