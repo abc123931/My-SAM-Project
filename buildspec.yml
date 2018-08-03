@@ -2,7 +2,7 @@ version: 0.2
 
 env:
   variables:
-    GO_VERSION: 1.10.1
+    GO_VERSION: 1.9.2
     SRC_DIR: src/github.com/abc123931/My-SAM-Project
 
 phases:
