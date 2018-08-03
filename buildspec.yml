@@ -29,12 +29,9 @@ phases:
   pre_build:
     commands:
 
-      # - mkdir -p ${GOPATH}/${SRC_DIR} && cd ${GOPATH}/${SRC_DIR}
       - mkdir -p ${GOPATH}/${SRC_DIR}
       - ln -s "${CODEBUILD_SRC_DIR}" "${GOPATH}/${SRC_DIR}/${PROJECT_NAME}"
       - cd ${GOPATH}/${SRC_DIR}/${PROJECT_NAME}
-      - ls
-      # - mv ${CODEBUILD_SRC_DIR}/* ${CODEBUILD_SRC_DIR}/.??* .
 
       # Fetch all dependencies
       - dep ensure
@@ -61,9 +58,6 @@ phases:
 
       # upload template to s3
       - aws cloudformation package --template template.yml --s3-bucket $S3_BUCKET --output-template template-export.yml
-
-      - ls
-      - cat template-export.yml
 
 artifacts:
   type: zip
