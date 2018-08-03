@@ -9,17 +9,18 @@ phases:
 
   install:
     commands:
+      # clean go repo
       - rm -rf /usr/local/go/
+
       # Install Golang
       - curl -sSL -o /tmp/go.tar.gz https://storage.googleapis.com/golang/go${GO_VERSION}.linux-amd64.tar.gz
       - tar -C /usr/local -xzf /tmp/go.tar.gz
       - export GOPATH=${HOME}/go && echo ${GOPATH}
       - export PATH=/usr/local/go/bin:${GOPATH}/bin:${PATH} && echo ${PATH}
       - type go && go version
-      - ls /usr/local/go/
 
-      - echo ${CODEBUILD_SRC_DIR}
-      - ls ${CODEBUILD_SRC_DIR}
+      # Install golint
+      - go get -u github.com/golang/lint/golint
 
       # install dep
       - go get -u github.com/golang/dep/cmd/dep
