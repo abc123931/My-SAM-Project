@@ -2,19 +2,22 @@ version: 0.2
 
 env:
   variables:
-    GO_VERSION: 1.9.2
+    GO_VERSION: 1.10.1
     SRC_DIR: src/github.com/abc123931/My-SAM-Project
 
 phases:
 
   install:
     commands:
+      - ls /usr/local/go/
       # Install Golang
       - curl -sSL -o /tmp/go.tar.gz https://storage.googleapis.com/golang/go${GO_VERSION}.linux-amd64.tar.gz
       - tar -C /usr/local -xzf /tmp/go.tar.gz
       - export GOPATH=${HOME}/go && echo ${GOPATH}
       - export PATH=/usr/local/go/bin:${GOPATH}/bin:${PATH} && echo ${PATH}
       - type go && go version
+
+      - ls /usr/local/go/
 
       - echo ${CODEBUILD_SRC_DIR}
       - ls ${CODEBUILD_SRC_DIR}
