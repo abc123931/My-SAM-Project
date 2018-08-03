@@ -40,9 +40,11 @@ Resources:
       CodeUri: testhandler/
       Handler: main
       Runtime: go1.x
-      Role: role-lambdaexec
-        # Fn::ImportValue:
-        #   !Join ['-', [!Ref 'ProjectId', !Ref 'AWS::Region', 'LambdaTrustRole']]
+      FunctionName: get-test-handler
+      Policies: AmazonDynamoDBFullAccess
+      Role:
+        Fn::ImportValue:
+          !Join ['-', [!Ref 'ProjectId', !Ref 'AWS::Region', 'LambdaTrustRole']]
       Events:
         GetEvent:
           Type: Api
