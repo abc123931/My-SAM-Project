@@ -9,6 +9,7 @@ phases:
 
   install:
     commands:
+      - rm -rf /usr/local/go/
       - ls /usr/local/go/
       # Install Golang
       - curl -sSL -o /tmp/go.tar.gz https://storage.googleapis.com/golang/go${GO_VERSION}.linux-amd64.tar.gz
@@ -16,7 +17,6 @@ phases:
       - export GOPATH=${HOME}/go && echo ${GOPATH}
       - export PATH=/usr/local/go/bin:${GOPATH}/bin:${PATH} && echo ${PATH}
       - type go && go version
-
       - ls /usr/local/go/
 
       - echo ${CODEBUILD_SRC_DIR}
