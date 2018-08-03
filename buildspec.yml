@@ -28,8 +28,10 @@ phases:
   pre_build:
     commands:
 
-      - mkdir -p ${GOPATH}/${SRC_DIR} && cd ${GOPATH}/${SRC_DIR}
+      # - mkdir -p ${GOPATH}/${SRC_DIR} && cd ${GOPATH}/${SRC_DIR}
       - ln -s "${CODEBUILD_SRC_DIR}" "${GOPATH}/${SRC_DIR}"
+      - cd ${GOPATH}/${SRC_DIR}
+      - ls
       # - mv ${CODEBUILD_SRC_DIR}/* ${CODEBUILD_SRC_DIR}/.??* .
 
       # Fetch all dependencies
