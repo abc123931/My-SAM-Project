@@ -35,8 +35,8 @@ type Table struct {
 }
 
 type Request struct {
-	Title    string `json: "title"`
-	Category string `json: "category"`
+	Title    string `json:"title"`
+	Category string `json:"category"`
 }
 
 func (table *Table) get(title string, category string, book *Book) (err error) {
