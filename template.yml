@@ -58,13 +58,32 @@ Resources:
       #         - ' iam:CreateRole'
       #       Resources:
       #         - 'arn:aws:iam::288889698830:role/role-lambdaexec'
-      # Role:
-      #   Fn::ImportValue:
-      #     !Join ['-', [!Ref 'ProjectId', !Ref 'AWS::Region', 'LambdaTrustRole']]
-      Policies: AWSLambdaDynamoDBExecutionRole
+      Role:
+        Fn::ImportValue:
+          !Join ['-', [!Ref 'ProjectId', !Ref 'AWS::Region', 'LambdaTrustRole']]
+      # Policies: AWSLambdaDynamoDBExecutionRole
       Events:
         GetEvent:
           Type: Api
           Properties:
             Path: /test
             Method: get
+  GetBook:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: get-book/
+      Handler: main
+      Runtime: go1.x
+      Role:
+        Fn::ImportValue:
+          !Join ['-', [!Ref 'ProjectId', !Ref 'AWS::Region', 'LambdaTrustRole']]
+      Events:
+        GetEvent:
+          Type: Api
+          Properties:
+            Path: /
+            Method: post
+      Environment: # More info about Env Vars: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#environment-object
+        Variables:
+          DYNAMO_REGION: ap-northeast-1
+          DYNAMO_ENPOINT: http://192.168.2.100:8000 
