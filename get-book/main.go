@@ -11,14 +11,12 @@ import (
 	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/aws/session"
 	"github.com/guregu/dynamo"
+	"github.com/joho/godotenv"
 )
 
 var (
-	dynamoRegion   = os.Getenv("DYNAMO_REGION")
-	dynamoEndpoint = os.Getenv("DYNAMO_ENPOINT")
-	//dynamoAccessKey    = os.Getenv("DYNAMO_ACCESSKEY")
-	//dynamoSecreteKey   = os.Getenv("DYNAMO_SECRETEKEY")
-	//dynamoSessionToken = os.Getenv("DYNAMO_SESSIONTOKEN")
+	dynamoRegion   string
+	dynamoEndpoint string
 )
 
 type Book struct {
@@ -37,6 +35,13 @@ type Table struct {
 type Request struct {
 	Title    string `json:"title"`
 	Category string `json:"category"`
+}
+
+func Env_load() {
+	err := godotenv.Load()
+	if err != nil {
+		fmt.Println("start lambda function at prod")
+	}
 }
 
 func (table *Table) get(title string, category string, book *Book) (err error) {
@@ -68,8 +73,6 @@ func handler(r events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, e
 	db := dynamo.New(session.New(), &aws.Config{
 		Region:   aws.String(dynamoRegion),
 		Endpoint: aws.String(dynamoEndpoint),
-		// DisableSSL:  aws.Bool(true),特にいらないっぽい
-		//Credentials: credentials.NewStaticCredentials(dynamoAccessKey, dynamoSecreteKey, dynamoSessionToken),
 	})
 
 	table := &Table{db.Table("Books")}
@@ -94,6 +97,11 @@ func handler(r events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, e
 	}, nil
 }
 
+func init() {
+	Env_load()
+	dynamoRegion = os.Getenv("DYNAMO_REGION")
+	dynamoEndpoint = os.Getenv("DYNAMO_ENPOINT")
+}
 func main() {
 	lambda.Start(handler)
 }
