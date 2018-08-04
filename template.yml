@@ -49,18 +49,19 @@ Resources:
       #         - 'dynamodb:GetItem'
       #       Resources:
       #         - '*'
-      Policies:
-        - Statement:
-          - Effect: Allow
-            Action:
-              - 'iam:GetRole'
-              - 'iam:PassRole'
-              - 'iam:CreateRole'
-            Resources:
-              - 'arn:aws:iam::288889698830:role/role-lambdaexec'
-      #Role: arn:aws:iam::288889698830:role/role-lambdaexec
-        # Fn::ImportValue:
-        #   !Join ['-', [!Ref 'ProjectId', !Ref 'AWS::Region', 'LambdaTrustRole']]
+      # Policies:
+      #   - Statement:
+      #     - Effect: Allow
+      #       Action:
+      #         - 'iam:GetRole'
+      #         - 'iam:PassRole'
+      #         - ' iam:CreateRole'
+      #       Resources:
+      #         - 'arn:aws:iam::288889698830:role/role-lambdaexec'
+      # Role:
+      #   Fn::ImportValue:
+      #     !Join ['-', [!Ref 'ProjectId', !Ref 'AWS::Region', 'LambdaTrustRole']]
+      Policies: AWSLambdaDynamoDBExecutionRole
       Events:
         GetEvent:
           Type: Api
