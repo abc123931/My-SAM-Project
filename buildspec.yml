@@ -54,6 +54,8 @@ phases:
       - go build -o main
       - cd ../testhandler
       - go build -o main
+      - cd ../get-book
+      - go build -o main
       - cd ../
 
       # upload template to s3
