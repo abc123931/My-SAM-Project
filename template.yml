@@ -49,15 +49,15 @@ Resources:
       #         - 'dynamodb:GetItem'
       #       Resources:
       #         - '*'
-      #Policies:
-      #  - Statement:
-      #    - Effect: Allow
-      #      Action:
-      #        - 'iam:GetRole'
-      #        - 'iam:PassRole'
-      #      Resources:
-      #        - 'arn:aws:iam::288889698830:role/role-lambdaexec'
-      Role: arn:aws:iam::288889698830:role/role-lambdaexec
+      Policies:
+        - Statement:
+          - Effect: Allow
+            Action:
+              - 'iam:GetRole'
+              - 'iam:PassRole'
+            Resources:
+              - 'arn:aws:iam::288889698830:role/role-lambdaexec'
+      #Role: arn:aws:iam::288889698830:role/role-lambdaexec
         # Fn::ImportValue:
         #   !Join ['-', [!Ref 'ProjectId', !Ref 'AWS::Region', 'LambdaTrustRole']]
       Events:
