@@ -55,6 +55,7 @@ Resources:
             Action:
               - 'iam:GetRole'
               - 'iam:PassRole'
+              - 'iam:CreateRole'
             Resources:
               - 'arn:aws:iam::288889698830:role/role-lambdaexec'
       #Role: arn:aws:iam::288889698830:role/role-lambdaexec
